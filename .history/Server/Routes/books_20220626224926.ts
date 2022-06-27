@@ -81,11 +81,9 @@ router.get('/edit/:id', (req, res, next) => {
 });
 
 router.post('/edit/:id', (req, res, next) => {
-  let id = req.params.id;
   // instantiate a new book to Add
   let UpdateBook = new book
   ({
-    "_id": id,
    "Title": req.body.title,
    "Price": req.body.price,
    "Author": req.body.author,
@@ -93,7 +91,7 @@ router.post('/edit/:id', (req, res, next) => {
   });
  
   // Insert the new book object into the database
-  book.updateOne({_id: id},UpdateBook, function(err: CallbackError)
+  book.create(UpdateBook, function(err: CallbackError)
   {
     if(err)
     {

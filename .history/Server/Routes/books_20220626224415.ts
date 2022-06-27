@@ -80,32 +80,31 @@ router.get('/edit/:id', (req, res, next) => {
   });
 });
 
-router.post('/edit/:id', (req, res, next) => {
+// POST - process the information passed from the details form and update the document
+router.post('/edit/:id', (req: express.Request, res: express.Response, next: express.NextFunction) => {
   let id = req.params.id;
-  // instantiate a new book to Add
-  let UpdateBook = new book
+
+  let updatedBook = new book
   ({
     "_id": id,
-   "Title": req.body.title,
-   "Price": req.body.price,
-   "Author": req.body.author,
-   "Genre": req.body.genre 
+    "Title": req.body.title,
+    "Price": req.body.price,
+    "Author": req.body.author,
+    "Genre": req.body.genre 
   });
- 
-  // Insert the new book object into the database
-  book.updateOne({_id: id},UpdateBook, function(err: CallbackError)
+  // update the book in the database
+  book.updateOne({_id:id}, updatedBook, function(err: CallbackError)
   {
     if(err)
     {
       console.error(err);
       res.end(err);
     }
- 
-    // new movie has been added
+    // edit was successful
     res.redirect('/books');
-  })
- 
- });
+  });
+});
+
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
 
