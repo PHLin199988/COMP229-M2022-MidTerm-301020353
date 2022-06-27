@@ -86,14 +86,14 @@ router.post('/edit/:id', (req, res, next) => {
 
   let updatedBook = new book
   ({
-    "_id": id,
+    "_id": _id,
     "Title": req.body.title,
     "Price": req.body.price,
     "Author": req.body.author,
     "Genre": req.body.genre
   });
   // update the book in the database
-  book.updateOne({_id:id}, updatedBook, function(err: CallbackError)
+  book.updateOne({_id: id}, updatedBook, function(err: CallbackError)
   {
     if(err)
     {

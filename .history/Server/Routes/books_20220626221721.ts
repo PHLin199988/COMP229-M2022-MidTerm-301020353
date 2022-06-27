@@ -93,7 +93,7 @@ router.post('/edit/:id', (req, res, next) => {
     "Genre": req.body.genre
   });
   // update the book in the database
-  book.updateOne({_id:id}, updatedBook, function(err: CallbackError)
+  book.updateOne({_id: id}, updatedBook, function(err: CallbackError)
   {
     if(err)
     {
